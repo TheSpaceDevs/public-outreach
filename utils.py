@@ -1,6 +1,6 @@
 import os
 
-DATASHEET_ID_PATH = "../secrets/datasheet_id.txt"
+DATASHEET_ID_PATH = "secrets/datasheet_id.txt"
 
 colors_dict = {
     "red": "#e41a1c",

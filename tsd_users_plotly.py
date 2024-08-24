@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 import plotly.express as px
 
-DATASET_PATH = "../data/tsd-users.csv"
+DATASET_PATH = "data/tsd-users.csv"
 
 datasheet_id = get_datasheet_id()
 r = requests.get(
@@ -37,8 +37,8 @@ def generate_tsd_reach_plot():
         yaxis_title="Total users worldwide across all platforms",
     )
 
-    fig.write_html("../plots/users_ranking.html")
-    remove_html_margins("../plots/users_ranking.html")
+    fig.write_html("plots/users_ranking.html")
+    remove_html_margins("plots/users_ranking.html")
 
 
 def generate_tsd_user_types_plot():
@@ -86,5 +86,5 @@ def generate_tsd_user_types_plot():
     )
     fig.update_traces(textposition="inside", textinfo="value+label")
 
-    fig.write_html("../plots/user_types.html")
-    remove_html_margins("../plots/user_types.html")
+    fig.write_html("plots/user_types.html")
+    remove_html_margins("plots/user_types.html")

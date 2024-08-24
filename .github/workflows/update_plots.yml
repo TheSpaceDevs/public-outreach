@@ -22,7 +22,7 @@ jobs:
       env:
           DATASHEET_ID: ${{ secrets.DATASHEET_ID }}
       run: |
-        python automation.py
+        python src/automation.py
     - name: 🕵️ Check if there are any changes
       id: verify_diff
       run: |

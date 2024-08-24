@@ -2,9 +2,11 @@ from utils import get_datasheet_id, remove_html_margins, COLORS, flatten
 import pandas as pd
 import requests
 import plotly.express as px
+import os
 
 DATASET_PATH = "data/tsd-users.csv"
 
+os.makedirs("data", exist_ok=True)
 datasheet_id = get_datasheet_id()
 r = requests.get(
     f"https://docs.google.com/spreadsheet/ccc?key={datasheet_id}&output=csv"

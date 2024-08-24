@@ -1,9 +1,22 @@
 from utils import get_datasheet_id, remove_html_margins
 import pandas as pd
-import plotly.express as px
 import requests
+import plotly.express as px
 
 DATASET_PATH = "../data/tsd-users.csv"
+
+colors_dict = {
+    "red": "#e41a1c",
+    "orange": "#ff7f00",
+    "blue": "#377eb8",
+    "pink": "#f781bf",
+    "yellow": "#dede00",
+    "green": "#4daf4a",
+    "grey": "#999999",
+    "purple": "#984ea3",
+}
+COLORS = ["blue", "orange", "red", "green", "pink", "yellow", "purple"]
+COLORS = [colors_dict[i] for i in COLORS]
 
 # def get_dataset():
 datasheet_id = get_datasheet_id()
@@ -25,64 +38,46 @@ fig = px.bar(
     color="Type",
     hover_data=hover_data,
     hover_name="Name",
+    template="plotly_dark",
     log_y=True,
+    color_discrete_sequence=COLORS,
 )
-# fig = px.histogram(
-#     users,
-#     x="Total reach",
-#     color="Type",
-#     marginal="rug",
-#     hover_data=hover_data,
-#     hover_name="Name",
-#     template="plotly_dark",
-#     # nbins=int(number_of_bins),
-#     # color_discrete_sequence=colors[:-1],
-# )
-# fig.update_layout(
-#     yaxis_title="Total launches per year",
-#     xaxis_range=[
-#         datetime(1957, 1, 1, 0, 0, 0),
-#         datetime(datetime.now().year, 12, 31, 23, 59, 59),
-#     ],
-#     yaxis_range=[0, ceil(data.Date.dt.year.value_counts().max() / 10) * 10 + 27],
-#     title_text="Orbital launch attempts per country since "
-#     + str(PastT0s.net.dt.year.min())
-#     + subtitle_html,
-#     legend_title="Launch Country",
-# )
 
 fig.update_layout(
+    title_text="<b>Global reach of The Space Devs users</b>"
+    + r"<br><sup>Limited to known users who agreed to share their analytics</sup>",
     xaxis_title=None,
-    updatemenus=[
-        dict(
-            type="buttons",
-            direction="up",
-            xanchor="right",
-            x=1,
-            pad={"r": 10, "t": 10},
-            buttons=list(
-                [
-                    dict(
-                        args=[{"yaxis.type": "log"}],
-                        label="Log Scale",
-                        method="relayout",
-                    ),
-                    dict(
-                        args=[{"yaxis.type": "linear"}],
-                        label="Linear Scale",
-                        method="relayout",
-                    ),
-                ]
-            ),
-        ),
-    ],
+    yaxis_title="Total users worldwide across all platforms",
+    # updatemenus=[
+    #     dict(
+    #         type="buttons",
+    #         direction="up",
+    #         xanchor="right",
+    #         x=1,
+    #         pad={"r": 10, "t": 10},
+    #         buttons=list(
+    #             [
+    #                 dict(
+    #                     args=[{"yaxis.type": "log"}],
+    #                     label="Log Scale",
+    #                     method="relayout",
+    #                     # make it better for dark theme
+    #                 ),
+    #                 dict(
+    #                     args=[{"yaxis.type": "linear"}],
+    #                     label="Linear Scale",
+    #                     method="relayout",
+    #                 ),
+    #             ]
+    #         ),
+    #     ),
+    # ],
 )
 
-fig.write_html("../plots/test.html")
-remove_html_margins("../plots/test.html")
+fig.write_html("../plots/users_ranking.html")
+remove_html_margins("../plots/users_ranking.html")
 
 # return pd.read_csv(DATASET_PATH)
-
 
 # def generate_plots():
 # dataset = get_dataset()
